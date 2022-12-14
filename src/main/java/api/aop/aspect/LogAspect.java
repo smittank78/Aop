@@ -35,6 +35,8 @@ public class LogAspect
 	@Pointcut("@annotation(api.aop.anotation.Log)") //annotation path
 	public void logger() {
 	}
+	
+	
 	@Before(value = "logger()")
 	public void loggerBefore() {
 		System.out.println("@Before");
@@ -49,15 +51,40 @@ public class LogAspect
 		System.out.println("@Around : " + joinPoint.getSignature());
 		joinPoint.proceed();
 	}
-	@AfterThrowing(value = "logger()")
-	public void loggerException() throws Throwable 
-	{
-		System.out.println("@AfterThrowing : Exception Handling ");
-		try {
-		throw new Exception();
-		}
-		catch (Exception e) {
-			System.out.println("Exception handled in method");
-		}
+	
+	/*
+	 * For single Parameter
+	 * changes in @Pointcut ,@Before ,@After
+	 * change method parameter
+	 */
+	
+	@Pointcut("@annotation(api.aop.anotation.ParameterLog) && args(a)") //annotation path
+	public void parameterLogger(int a) {
+	}
+	
+	@Before(value = "parameterLogger(a)", argNames = "a")
+	public void parameterLoggerBefore(int a) {
+		System.out.println("before : a = " + a );
+	}
+	@After(value = "parameterLogger(a)", argNames = "a")
+	public void parameterLoggerAfter(int a) {
+		System.out.println("after multiply : a = " + (2*a));
+	}
+	/*
+	 * For Multiple Parameter
+	 * changes in @Pointcut ,@Before ,@After
+	 * change method parameter
+	 */
+	@Pointcut("@annotation(api.aop.anotation.MultipleParameterLog) && args(a,b)") //annotation path
+	public void multipleParameterLogger(int a,int b) {
+	}
+	
+	@Before(value = "multipleParameterLogger(a,b)", argNames = "a,b")
+	public void multipleParameterLoggerBefore(int a,int b) {
+		System.out.println("before : a = " + a + " && b = " + b);
+	}
+	@After(value = "multipleParameterLogger(a,b)", argNames = "a,b")
+	public void multipleParameterLoggerAfter(int a,int b) {
+		System.out.println("after multiply : a = " + (2*a) + " && b = " + (2*b));
 	}
 }
