@@ -1,8 +1,4 @@
-api/aop/controller/EmployeeController.class
-api/aop/AopApplication.class
-api/aop/controller/EmployeeService.class
-api/aop/aspect/EmployeeServiceAspect.class
-api/aop/controller/Employee.class
 api/aop/controller/Handler.class
 api/aop/anotation/Log.class
+api/aop/AopApplication.class
 api/aop/aspect/LogAspect.class
